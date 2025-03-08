@@ -1,6 +1,5 @@
 import streamlit as st
-import pandas as pd  # Added Pandas for potential future use
-from passlib.hash import sha256_crypt
+import pandas as pd
 import pyshorteners
 
 # Custom styling for a professional, modern UI
@@ -62,11 +61,6 @@ def check_password_strength(password):
     else:
         return "Very Strong", 5, "very-strong"
 
-# Function to shorten the copied hashed password link
-def shorten_link(long_link):
-    shortener = pyshorteners.Shortener()
-    return shortener.tinyurl.short(long_link)
-
 # Streamlit UI
 def main():
     st.set_page_config(page_title="Password Strength Meter", page_icon="🔐", layout="centered")
@@ -98,14 +92,6 @@ def main():
         # Display strength level with progress bar
         st.markdown(f"<div class='strength-bar {css_class}' style='width: {score * 20}%;'></div>", unsafe_allow_html=True)
         st.markdown(f"<h3 style='text-align: center; color: white;'>{strength}</h3>", unsafe_allow_html=True)
-
-        # Hashed password for security demonstration
-        hashed_password = sha256_crypt.hash(password)
-        shortened_link = shorten_link(f"https://example.com/{hashed_password[-10:]}")  # Shortened example
-
-        # White-colored heading for hashed password
-        st.markdown("<p class='white-text'>🔐 Securely Hashed Password:</p>", unsafe_allow_html=True)
-        st.code(shortened_link, language="plaintext")
 
 if __name__ == "__main__":
     main()
