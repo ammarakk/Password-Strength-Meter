@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import pyshorteners
 
 # Custom styling for a professional, modern UI
 SPACE_THEME = """
